@@ -1,0 +1,78 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  padding-bottom: 50px;
+}
+
+.container {
+  width: 95%;
+  max-width: none;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.navbar {
+  opacity: 0.9;
+  background-color: #000;
+}
+
+.navbar a {
+  color: white;
+}
+
+
+.nav-item.active {
+  border-bottom: white solid 2px;
+}
+
+.toggler {
+  color: white;
+  font-size: 80%;
+  font-weight: 500;
+}
+
+section#header>.jumbotron {
+  margin-top: 15px;
+  background-image: url('../images/food2.JPG');
+  background-size: 47% 100%;
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding: 10% 4%;
+  padding-left: 25px;
+  border-radius: none;
+}
+
+h1#header {
+  font-weight: 200;
+  font-size: 300%;
+  width: 53%;
+}
+
+.card>.card-img-top {
+  margin-top: 10px;
+}
+
+.card {
+  margin-bottom: 20px !important;
+}
+
+.card-group {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.card-icon {
+  text-align: center;
+  padding: 20px;
+  height: 60%;
+  font-size: 700%;
+}
+
+@media (max-width: 700px) {
+  h1#header {
+    font-size: 200%;
+  }
+}
