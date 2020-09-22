@@ -4,20 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="static/css/all.min.css" />
-    <link rel="stylesheet" href="static/css/bootstrap.css" />
-    <link rel="stylesheet" href="static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/all.min.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
     <title>Afnaan's Kitchen</title>
   </head>
+
   <body class="container">
-    <nav class="navbar navbar-expand-lg sticky-top bg-dark">
+    <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
           <img
-            src="static/images/logo.jpg"
+            src="../static/images/logo.jpg"
             class="logo"
             alt="Afnaan's Kitchen"
           />
@@ -39,7 +40,7 @@
               <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item mr-3">
-              <a class="nav-link" href="orders.html">Menu</a>
+              <a class="nav-link" href="menu.html">Menu</a>
             </li>
           </ul>
           <ul class="navbar-nav ml-auto">
@@ -57,9 +58,9 @@
         </div>
       </div>
     </nav>
-    <section id="header">
+    <section id="header" class="index">
       <div class="jumbotron">
-        <h1 id="header">
+        <h1 class="header">
           Enjoy pizzas and buns - straight from Afnaan's Kitchen
         </h1>
       </div>
@@ -77,7 +78,7 @@
           </div>
         </div>
         <div class="col-md-1 col-md-0"></div>
-        <div class="card col-lg-4 col-md-4">
+        <div class="card col-lg-4 col-md-6">
           <span class="card-icon"><i class="fas fa-dollar-sign"></i></span>
           <div class="card-body">
             <h5 class="card-title">Low Prices</h5>
@@ -88,7 +89,7 @@
           </div>
         </div>
         <div class="col-lg-1 col-md-0"></div>
-        <div class="card col-lg-4 col-md-6">
+        <div class="card col-lg-4 col-md-6 center mx-auto">
           <span class="card-icon"><i class="fas fa-home"></i></span>
           <div class="card-body">
             <h5 class="card-title">Delivered at your doorstep</h5>
@@ -99,8 +100,29 @@
         </div>
       </div>
     </section>
-    <script src="static/js/jquery-3.3.1.min.js"></script>
-    <script src="static/js/bootstrap.bundle.min.js"></script>
-    <script src="static/js/main.js"></script>
+    <footer id="footer">
+      <div class="container-fluid">
+        <h2>Contact</h2>
+        <hr />
+        <a href="tel:+917358743890" class="footer-link col-lg-12"
+          ><i class="fa fa-phone"></i> +91 73587 43890</a
+        >
+        <a
+          href="https://www.instagram.com/afnaanskitchen/"
+          class="footer-link col-lg-12"
+          ><i class="social-icon fab fa-instagram"></i> @afnaanskitchen</a
+        >
+        <a href="mailto:afnaanskitchen@gmail.com" class="footer-link col-lg-12">
+          <i class="social-icon fas fa-envelope"></i> afnaanskitchen@gmail.com
+        </a>
+        <hr />
+        <br />
+        <br />
+        <p>© Copyright <span class="year"></span> Afnaan's Kitchen</p>
+      </div>
+    </footer>
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/main.js"></script>
   </body>
 </html>
