@@ -59,32 +59,82 @@
       </div>
     </nav>
     <section id="header" class="menu">
-      <span class="header">Menu</span>
+      <div class="jumbotron">
+        <h1 class="title">Our Menu</h1>
+        <small class="subtext">Check out all of our delicious items!</small>
+      </div>
     </section>
     <section id="menu">
+      <div class="form-group">
+        <label for="search-input"> Search: </label>
+        <input type="text" class="form-control" id="search-input" />
+      </div>
+      <div class="hidden unavailable">No results available</div>
       <div class="row vertical-box displayFlex">
         <div class="card item col-md-4 col-xs-12 col-sm-6">
           <div class="row">
-            <span class="icon-box">
-              <span class="veg">Vegetarian</span>
+            <span class="veg">Vegetarian</span>
+            <div class="img-wrapper">
               <img
-                src="../static/images/food1.JPG"
+                src="../static/images/food3.JPG"
                 alt="margherita"
                 title=""
-                class="img-responsive"
-            /></span>
-            <h3>Margherita</h3>
-            <p>
-              <small
-                >A hugely popular margherita, with a deliciously tangy single
-                cheese topping</small
-              >
-            </p>
-            <a href="order.html" class="btn btn-primary btn-block"
+                class="img-responsive item-img"
+              />
+            </div>
+
+            <div class="item-description">
+              <h3 class="item-name">Margherita</h3>
+              <small>The classic. Cheese and Sauce.</small>
+            </div>
+            <a href="order.html" class="btn btn-primary order-button"
               >Order Now</a
             >
           </div>
         </div>
+        <div class="card item col-md-4 col-xs-12 col-sm-6">
+          <div class="row">
+            <span class="veg">Vegetarian</span>
+            <div class="img-wrapper">
+              <img
+                src="../static/images/food3.JPG"
+                alt="margherita"
+                title=""
+                class="img-responsive item-img"
+              />
+            </div>
+
+            <div class="item-description">
+              <h3 class="item-name">Margherita</h3>
+              <small>The classic. Cheese and Sauce.</small>
+            </div>
+            <a href="order.html" class="btn btn-primary order-button"
+              >Order Now</a
+            >
+          </div>
+        </div>
+        <div class="card item col-md-4 col-xs-12 col-sm-6">
+          <div class="row">
+            <span class="veg">Vegetarian</span>
+            <div class="img-wrapper">
+              <img
+                src="../static/images/food3.JPG"
+                alt="margherita"
+                title=""
+                class="img-responsive item-img"
+              />
+            </div>
+
+            <div class="item-description">
+              <h3 class="item-name">Margherita</h3>
+              <small>The classic. Cheese and Sauce.</small>
+            </div>
+            <a href="order.html" class="btn btn-primary order-button"
+              >Order Now</a
+            >
+          </div>
+        </div>
+        
       </div>
     </section>
     <footer id="footer">

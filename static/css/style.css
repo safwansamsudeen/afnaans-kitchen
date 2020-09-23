@@ -1,5 +1,10 @@
+/* Top level */
 body {
   font-family: "Raleway", sans-serif;
+}
+
+hr {
+  border-top: 5px solid #fff;
 }
 
 .container {
@@ -7,6 +12,15 @@ body {
   max-width: none;
 }
 
+.hidden {
+  display: none;
+}
+
+.unavailable {
+  text-align: center;
+}
+
+/* Navbar */
 .logo {
   width: 50px;
   height: 50px;
@@ -31,68 +45,48 @@ body {
   font-weight: 500;
 }
 
-section#header > .jumbotron {
-  /* background-color: #03c0bb; */
-  /* color: white; */
+/* Jumbotrons */
+.jumbotron {
   margin-top: 15px;
   background-size: 47% 100%;
   background-repeat: no-repeat;
   background-position: right center;
   padding: 10% 4%;
   padding-left: 25px;
-}
-
-section#header.index > .jumbotron {
   background-image: url("../images/header_background.JPG");
 }
 
-section#header.menu > .jumbotron {
-  background-image: url("../images/header_background.JPG");
-  margin: 0 auto;
+.menu .jumbotron {
+  background-image: url("../images/menu.jpg");
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  background-position: right center;
 }
 
-.item {
-  text-align: center !important;
+section#header.menu>.jumbotron {
+  padding: 0 4% 10% 4%;
 }
 
-.icon-box img {
-  width: 100%;
-  height: 90%;
-  margin: 0 auto;
-}
-
-.item-title {
-  position: absolute;
-}
-
-.item-img {
-  width: 100%;
-  height: 20%;
-}
-
-.veg-non-veg-mark {
-  float: right;
-}
-
-.header {
+.header-description {
   width: 53%;
-}
-
-.index .header {
   font-weight: 200;
   font-size: 300%;
 }
 
-.menu .header {
+
+.menu .title {
+  padding: 2% 0 4%;
   font-weight: 500;
   font-size: 400%;
 }
 
-.card > .card-img-top {
-  margin-top: 10px;
+.subtext {
+  margin-top: 10%;
 }
 
+/* Card */
 .card {
+  padding: 20px;
   margin-bottom: 20px !important;
 }
 
@@ -108,6 +102,65 @@ section#header.menu > .jumbotron {
   font-size: 700%;
 }
 
+/* Veg/Non-veg */
+.veg,
+.non-veg {
+  color: white;
+  width: 90%;
+  height: 8%;
+  border-radius: 2px;
+  padding: 1px;
+  margin: 1px auto;
+}
+
+.veg {
+  background-color: green;
+}
+
+.non-veg {
+  background-color: red;
+}
+
+/* Menu items */
+.item {
+  text-align: center;
+  margin: 10px 5px;
+  height: 450px;
+}
+
+.item-name {
+  margin: 10px auto;
+  width: 100%;
+}
+
+.img-wrapper {
+  height: 60%;
+}
+
+.item-img {
+  width: 90%;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.item-description  {
+  margin: 0 auto;
+  width: 80%;
+  height: 30%;
+}
+.order-button {
+  padding: 15px 25%;
+  margin: 0 auto;
+}
+
+/* Search Input */
+#search-input {
+  display: inline-block;
+  width: 80%;
+  margin-left: 10px;
+}
+
+/* Footer */
 #footer {
   background-color: #000;
   color: #fff;
@@ -132,18 +185,40 @@ section#header.menu > .jumbotron {
   margin: 20px 10px;
 }
 
-hr {
-  border-top: 5px solid #fff;
-}
 
+/* Responsiveness */
 @media (max-width: 700px) {
-  h1#header {
+  h1.header-description {
     font-size: 200%;
+  }
+
+  .menu .title {
+    font-size: 200%;
+  }
+
+  .menu .jumbotron {
+    background-image: none;
   }
 }
 
-@media (max-width: 1200px) {
-  .card {
-    flex: none;
+@media (min-width: 700px) and (max-width: 1050px) {
+  .col-sm-6 {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+  .item {
+    margin: 10px 5px;
+    height: 375px;
+  }
+  .item-img {
+    height: 125px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 868px) {
+  .col-md-4 {
+    flex: 0 0 32%;
+    max-width: 32%;
   }
 }
