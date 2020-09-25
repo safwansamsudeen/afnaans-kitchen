@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+{% block content %}
+
+<section id="header" class="index">
+  <div class="jumbotron">
+    <h1 class="header-description">
+      Enjoy pizzas and buns - straight from Afnaan's Kitchen
+    </h1>
+  </div>
+</section>
+<section id="features">
+  <div class="row card-group">
+    <div class="card col-lg-4 col-md-6">
+      <span class="card-icon"><i class="fas fa-check-circle"></i></span>
+      <div class="card-body">
+        <h5 class="card-title text-center">Fresh Ingredients</h5>
+        <p class="card-text text-center">
+          We make our pizzas from fresh and juicy ingredients, ensuring a
+          healthy and tasty meal for you.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-1 col-md-0"></div>
+    <div class="card col-lg-4 col-md-6">
+      <span class="card-icon"><i class="fas fa-dollar-sign"></i></span>
+      <div class="card-body">
+        <h5 class="card-title text-center">Low Prices</h5>
+        <p class="card-text text-center">
+          We keep out prices low and affordable so that you can enjoy great
+          food with less expenses.
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-0"></div>
+    <div class="card col-lg-4 col-md-6 center mx-auto">
+      <span class="card-icon"><i class="fas fa-home"></i></span>
+      <div class="card-body">
+        <h5 class="card-title text-center">Delivered at your doorstep</h5>
+        <p class="card-text text-center">
+          No going out now! With Afnaan's Kitchen, your pizzas come to you.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About{% endblock %}
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white bg-primary">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">About Afnaan's Kitchen</h1>
+        <p class="lead">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+          enim ad minim veniam, quis nostrud exercitation ullamco laboris
+          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat
+          nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="team" class="py-5">
+  <div class="container">
+    <h2 class="text-center pb-4">Meet Our Team</h2>
+    <div class="row text-center justify-content-center">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="{% static 'images/safwan_avatar.jpg' %}" alt="Safwan Avatar Image"
+            class="rounded-circle mb-3 avatar" />
+          <h4 class="card-title">Safwan Samsudeen</h4>
+          <p class="text-success">
+            <i class="fas fa-award text-success mb-3"></i> Unknown
+          </p>
+          <p class="description">
+            Safwan Samsudeen is a web developer and designer. Yup, he made
+            the thing you are looking at now!
+          </p>
+          <p>
+            <i class="fas fa-envelope-open"></i> safwansamsudeen@gmail.com
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="../static/images/safwan_avatar.jpg" alt="Safwan Avatar Image" class="rounded-circle mb-3 avatar" />
+          <h4 class="card-title">Afnaan Ahmed</h4>
+          <p class="text-success">
+            <i class="fas fa-award text-success mb-3"></i> CEO and Chef
+          </p>
+          <p class="description">
+            Afnaan Ahmed is the founder of Afnaan's Kitchen. More
+            importantly, he cooks the delicious pizzas you crave for every
+            day!
+          </p>
+          <p>
+            <i class="fas fa-envelope-open"></i> afnaanahmed271@gmail.com
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
