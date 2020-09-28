@@ -1,240 +1,52 @@
 {% extends 'base.html' %}
+{% load index %}
 {% block title %}Menu{% endblock %}
 {% block content %}
-    <section id="header" class="menu">
-      <div class="jumbotron">
-        <h1 class="title">Our Menu</h1>
-        <small class="subtext">Check out all of our delicious items!</small>
-      </div>
-    </section>
-    <section id="menu">
-      <div class="form-group search-group">
-        <label for="search-input"> Search: </label>
-        <input type="text" class="form-control" id="search-input" />
-      </div>
-      <div class="hidden unavailable">No results available</div>
-      <div class="row justify-content-center">
-        <h1 class="col-md-12 text-center food-type">Vegetarian Pizzas</h1>
-        <div class="col-md-6 col-lg-4 mb-4 item">
-          <div class="card">
-            <img
-              class="card-img-top"
-              src="../static/images/food1.JPG"
-              alt="Margherita Pizza Image"
-            />
-            <div class="card-img-overlay">
-              <h2>
-                <span class="badge badge-primary text-white">₹190</span>
-              </h2>
-            </div>
-            <div class="card-img-overlay right-align">
-              <div class="cover">
-                <div class="veg"></div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="listing-heading text-center">
-                <h4 class="text-primary">Margherita Pizza</h4>
-                <div class="col-12 text-center description">
-                  Chewy Mozzarella blended in with fresh basil and seasoned with
-                  light herbs.
-                </div>
-              </div>
-              <hr />
-              <hr />
-              <hr />
-              <a
-                href="order.html"
-                class="btn btn-primary btn-block order-button"
-                >Order Now</a
-              >
-            </div>
+<section id="header" class="menu">
+  <div class="jumbotron">
+    <h1 class="title">Our Menu</h1>
+    <small class="subtext">Check out all of our delicious items!</small>
+  </div>
+</section>
+<section id="menu">
+  <div class="form-group search-group">
+    <label for="search-input"> Search: </label>
+    <input type="text" class="form-control" id="search-input" />
+  </div>
+  <div class="hidden unavailable">No results available</div>
+  {% for item_type in items %}
+  <div class="row item-row justify-content-center">
+    <h1 class="col-md-12 text-center food-type">{{types | index:forloop.counter0}}</h1>
+    {% for item in item_type %}
+    <div class="col-md-6 col-lg-4 mb-4 item">
+      <div class="card">
+        <img class="card-img-top" src="{{item.main_image.url}}" alt="Margherita Pizza Image" />
+        <div class="card-img-overlay">
+          <h2>
+            <span class="badge badge-primary text-white">₹{{item.price}}</span>
+          </h2>
+        </div>
+        <div class="card-img-overlay right-align">
+          <div class="cover">
+            <div class="{% if item.veg %}veg{% else %}non-veg{% endif %}"></div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4 mb-4 item">
-          <div class="card">
-            <img
-              class="card-img-top"
-              src="../static/images/food1.JPG"
-              alt="Mushroom Riot Image"
-            />
-            <div class="card-img-overlay">
-              <h2>
-                <span class="badge badge-primary text-white">₹275</span>
-              </h2>
-            </div>
-            <div class="card-img-overlay right-align">
-              <div class="cover">
-                <div class="veg"></div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="listing-heading text-center">
-                <h4 class="text-primary">Mushroom Riot</h4>
-                <div class="col-12 text-center description">
-                  Buttery mushrooms along with garlic, crunchy onions, and
-                  capsicum.
-                </div>
-              </div>
-              <hr />
-              <hr />
-              <hr />
-              <a
-                href="order.html"
-                class="btn btn-primary btn-block order-button"
-                >Order Now</a
-              >
+        <div class="card-body">
+          <div class="listing-heading text-center">
+            <h4 class="text-primary">{{item}}</h4>
+            <div class="col-12 text-center description">
+              {{item.description}}
             </div>
           </div>
+          <hr />
+          <hr />
+          <hr />
+          <a href="order.html" class="btn btn-primary btn-block order-button">Order Now</a>
         </div>
       </div>
-      <div class="row justify-content-center">
-        <h1 class="col-md-12 text-center food-type">Non vegetarian Pizzas</h1>
-        <div class="col-md-6 col-lg-4 mb-4 item">
-          <div class="card">
-            <img
-              class="card-img-top"
-              src="../static/images/food1.JPG"
-              alt="Margherita"
-            />
-            <div class="card-img-overlay">
-              <h2>
-                <span class="badge badge-primary text-white">₹350</span>
-              </h2>
-            </div>
-            <div class="card-img-overlay right-align">
-              <div class="cover">
-                <div class="non-veg"></div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="listing-heading text-center">
-                <h4 class="text-primary">Namma Chennai Pizza</h4>
-                <div class="col-12 text-center description">
-                  Tandoori Country Chicken with some cheese (cheddar and
-                  mozzarella), olives, and jalapenos.
-                </div>
-              </div>
-              <hr />
-              <hr />
-              <hr />
-              <a
-                href="order.html"
-                class="btn btn-primary btn-block order-button"
-                >Order Now</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-4 item">
-          <div class="card">
-            <img
-              class="card-img-top"
-              src="../static/images/food1.JPG"
-              alt="Margherita"
-            />
-            <div class="card-img-overlay">
-              <h2>
-                <span class="badge badge-primary text-white">₹375</span>
-              </h2>
-            </div>
-            <div class="card-img-overlay right-align">
-              <div class="cover">
-                <div class="non-veg"></div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="listing-heading text-center">
-                <h4 class="text-primary">Meat Feast</h4>
-                <div class="col-12 text-center description">
-                  Desi minced mutton topped with cheese (cheddar and
-                  mozzarella), olives, and jalapenos.
-                </div>
-              </div>
-              <hr />
-              <hr />
-              <hr />
-              <a
-                href="order.html"
-                class="btn btn-primary btn-block order-button"
-                >Order Now</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <h1 class="col-md-12 text-center food-type">Desserts</h1>
-        <div class="col-md-6 col-lg-4 mb-4 item">
-          <div class="card">
-            <img
-              class="card-img-top"
-              src="../static/images/food1.JPG"
-              alt="Margherita"
-            />
-            <div class="card-img-overlay">
-              <h2>
-                <span class="badge badge-primary text-white">₹100</span>
-              </h2>
-            </div>
-            <div class="card-img-overlay right-align">
-              <div class="cover">
-                <div class="veg"></div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="listing-heading text-center">
-                <h4 class="text-primary">Classic Coffee Bun</h4>
-                <div class="col-12 text-center description">
-                  So and So and So and So and So and So and So
-                </div>
-              </div>
-              <hr />
-              <hr />
-              <hr />
-              <a
-                href="order.html"
-                class="btn btn-primary btn-block order-button"
-                >Order Now</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-4 item">
-          <div class="card">
-            <img
-              class="card-img-top"
-              src="../static/images/food1.JPG"
-              alt="Margherita"
-            />
-            <div class="card-img-overlay">
-              <h2>
-                <span class="badge badge-primary text-white">₹125</span>
-              </h2>
-            </div>
-            <div class="card-img-overlay right-align">
-              <div class="cover">
-                <div class="veg"></div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="listing-heading text-center">
-                <h4 class="text-primary">Nutella Coffee Bun</h4>
-                <div class="col-12 text-center description">
-                  So and So and So and So and So and So and So
-                </div>
-              </div>
-              <hr />
-              <hr />
-              <hr />
-              <a
-                href="order.html"
-                class="btn btn-primary btn-block order-button"
-                >Order Now</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</section>
 {% endblock content %}

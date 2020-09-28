@@ -2,6 +2,7 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 <section id="login" class="bg-light py-5">
+  {% include 'partials/_alerts.html' %}
   <div class="container">
     <div class="row">
       <div class="col-md-6 mx-auto">
@@ -11,6 +12,7 @@
           </div>
           <div class="card-body">
             <form action="{% url 'login' %}" method="POST">
+              {% csrf_token %}
               <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" name="username" class="form-control" required autocomplete="off" />

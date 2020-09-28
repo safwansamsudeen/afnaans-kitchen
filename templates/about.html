@@ -24,40 +24,24 @@
   <div class="container">
     <h2 class="text-center pb-4">Meet Our Team</h2>
     <div class="row text-center justify-content-center">
+      {% for person in people %}
       <div class="col-md-4">
         <div class="card">
           <img src="{% static 'images/safwan_avatar.jpg' %}" alt="Safwan Avatar Image"
             class="rounded-circle mb-3 avatar" />
-          <h4 class="card-title">Safwan Samsudeen</h4>
+          <h4 class="card-title">{{person.name}}</h4>
           <p class="text-success">
-            <i class="fas fa-award text-success mb-3"></i> Unknown
+            <i class="fas fa-award text-success mb-3"></i> {{person.positions}}
           </p>
           <p class="description">
-            Safwan Samsudeen is a web developer and designer. Yup, he made
-            the thing you are looking at now!
+            {{person.description}}
           </p>
           <p>
-            <i class="fas fa-envelope-open"></i> safwansamsudeen@gmail.com
+            <i class="fas fa-envelope-open"></i> {{person.email_address}}
           </p>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card">
-          <img src="../static/images/safwan_avatar.jpg" alt="Safwan Avatar Image" class="rounded-circle mb-3 avatar" />
-          <h4 class="card-title">Afnaan Ahmed</h4>
-          <p class="text-success">
-            <i class="fas fa-award text-success mb-3"></i> CEO and Chef
-          </p>
-          <p class="description">
-            Afnaan Ahmed is the founder of Afnaan's Kitchen. More
-            importantly, he cooks the delicious pizzas you crave for every
-            day!
-          </p>
-          <p>
-            <i class="fas fa-envelope-open"></i> afnaanahmed271@gmail.com
-          </p>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
