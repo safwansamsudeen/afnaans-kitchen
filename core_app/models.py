@@ -1,11 +1,23 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from random import randint
 
 
-class CustomUser(User):
+def random_id():
+    n = 12
+    range_start = 10**(n-1)
+    range_end = (10**n)-1
+    return randint(range_start, range_end)
+class CustomUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     address = models.TextField()
     phone_number = models.CharField(max_length=100)
+    confirm_id = models.BigIntegerField(default=random_id)
+    confirmed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
 
 
 class FoodTypeModel(models.Model):

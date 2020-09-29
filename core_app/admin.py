@@ -3,10 +3,8 @@ from .models import FoodItemModel, FoodTypeModel, TeamModel, CustomUser
 
 
 class CustomUserAdmin(admin.ModelAdmin):
-    pass
-    # list_display = ('phone_number', 'short_name', 'date_added')
-    # list_filter = ('long_name', 'short_name', 'date_added')
-    # search_fields = ('long_name', 'short_name', 'date_added')
+    list_display = ('user', 'confirmed', 'confirm_id')
+    # list_editable = ('confirmed',)
 
 
 class FoodItemModelAdmin(admin.ModelAdmin):

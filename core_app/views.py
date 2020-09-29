@@ -1,7 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
-
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from .models import FoodItemModel, TeamModel, FoodTypeModel, CustomUser
+
+
+def confirm_account(req, account_id):
+    if CustomUser.objects.all().filter(confirm_id=account_id, confirmed=False):
+        user = CustomUser.objects.get(confirm_id=account_id)
+        user.confirmed = True
+        user.save()
+        return redirect('login')
 
 
 def index(req):
@@ -33,7 +42,8 @@ def login(req):
         password = req.POST["password"]
 
         user = auth.authenticate(username=username, password=password)
-        if user:
+        print(user)
+        if user and CustomUser.objects.all().filter(user=user, confirmed=True):
             auth.login(req, user)
             messages.success(req, "You are logged in.")
             return redirect("login")
@@ -52,26 +62,40 @@ def register(req):
         email = req.POST["email"]
         password = req.POST["password"]
         password2 = req.POST["password2"]
-
         # Password matches validation
         if password != password2:
             messages.error(req, "Passwords do not match!")
             return redirect("register")
 
         # Username unique validation
-        elif CustomUser.objects.filter(username=username).exists():
+        elif User.objects.filter(username=username).exists():
             messages.error(req, "Username already exists!")
             return redirect("register")
 
-        # Email unique validation
-        elif CustomUser.objects.filter(email=email).exists():
-            messages.error(req, "Email already exists!")
-            return redirect("register")
+        # # Email unique validation
+        # elif User.objects.filter(email=email).exists():
+        #     messages.error(req, "Email already exists!")
+        #     return redirect("register")
 
         else:
-            user = CustomUser.objects.create_user(
-                username=username, password=password, email=email, phone_number=phone_number, address=address)
-            messages.success(req, "You are registered and can login.")
-            return redirect("login")
+            try:
+                user = User.objects.create_user(
+                    username=username, password=password, email=email)
+                custom_user = CustomUser.objects.create(
+                    user=user, phone_number=phone_number, address=address)
+                send_mail("Afnaan's Kitchen Account confirmation",
+                          f"Thanks for signing up to Afnaan's Kitchen! We hope you will have an excellent time eating our yummy pizzas! Just one last step...\n\nHead over to {req.META['HTTP_HOST']}/confirm_account/{custom_user.confirm_id}",
+                          'safwansamsudeen@gmail.com',
+                          [email, 'safwansamsudeen@gmail.com'],
+                          fail_silently=False
+                          )
+                messages.success(
+                    req, "We sent you a confirmation link. Please check your inbox.")
+                return redirect("login")
+            except Exception as e:
+                print(e)
+                messages.error(
+                    req, "There was an error. Please try again.")
+                return redirect("register")
     else:
         return render(req, "register.html")

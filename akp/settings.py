@@ -138,3 +138,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_files')
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+# Email Config
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'afnaanskitchen.team@gmail.com'
+EMAIL_HOST_PASSWORD = 'AfnaansK@ak13'
+EMAIL_USE_TLS = True
