@@ -51,6 +51,10 @@ hr {
   font-weight: 500;
 }
 
+.dropdown {
+  opacity: 1;
+}
+
 /* Jumbotrons */
 .jumbotron {
   margin-top: 15px;
@@ -174,7 +178,11 @@ section#header.menu>.jumbotron {
   text-align: center;
 }
 
-#search-input {
+label {
+  text-align: center;
+}
+
+.styled-input {
   display: inline-block;
   width: 80%;
   margin-left: 10px;
@@ -201,7 +209,7 @@ section#header.menu>.jumbotron {
 }
 
 .social-icon {
-  margin: 20px 10px ;
+  margin: 20px 10px;
 }
 
 

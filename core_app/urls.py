@@ -6,5 +6,11 @@ urlpatterns = [
     path('menu', views.menu, name='menu'),
     path('login', views.login, name='login'),
     path('register', views.register, name='register'),
-    path('confirm_account/<int:account_id>', views.confirm_account, name='confirm_account'),
+    path('confirm_account/<int:account_id>',
+         views.confirm_account, name='confirm_account'),
+    path('cart', views.cart, name='cart'),
+    path('settings', views.settings, name='settings'),
+    path('logout', views.logout, name='logout'),
+    path('change_password', views.change_password, name='change_password'),
+    path('change_email', views.change_email, name='change_email'),
 ]

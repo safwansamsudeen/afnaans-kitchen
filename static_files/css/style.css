@@ -51,6 +51,10 @@ hr {
   font-weight: 500;
 }
 
+.dropdown {
+  opacity: 1;
+}
+
 /* Jumbotrons */
 .jumbotron {
   margin-top: 15px;
@@ -201,7 +205,7 @@ section#header.menu>.jumbotron {
 }
 
 .social-icon {
-  margin: 20px 10px ;
+  margin: 20px 10px;
 }
 
 

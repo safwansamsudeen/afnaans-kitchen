@@ -19,6 +19,24 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item mr-3 {% if '/register' == request.path %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'cart' %}">
+                        <i class="fa fa-shopping-cart"></i> Cart</a>
+                </li>
+                <li class="nav-item mr-3 dropdown {% if '/login' == request.path %}active{% endif %}">
+                    <a class="nav-link dropdown-toggle" id='dropdownMenuButton' data-toggle="dropdown" href=''
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-plus"></i> {{user.username}}</a>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{% url 'settings' %}">Settings</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+                    </div>
+                </li>
+                {% else %}
                 <li class="nav-item mr-3 {% if '/register' == request.path %}active{% endif %}">
                     <a class="nav-link" href="{% url 'register' %}">
                         <i class="fas fa-user-plus"></i> Register</a>
@@ -27,6 +45,7 @@
                     <a class="nav-link" href="{% url 'login' %}">
                         <i class="fas fa-sign-in-alt"></i> Login</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>

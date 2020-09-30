@@ -2,7 +2,86 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from .models import FoodItemModel, TeamModel, FoodTypeModel, CustomUser
+from .models import FoodItemModel, TeamModel, FoodTypeModel, CustomUser, random_id
+
+
+def login_required(func):
+    def func_wrapper(req):
+        if req.user.is_authenticated:
+            return func(req)
+        else:
+            messages.error(req, "Please login first")
+            return render(req, 'login.html')
+    return func_wrapper
+
+
+@login_required
+def change_email(req):
+    current_user = CustomUser.objects.get(user=req.user.id)
+    if req.method == 'POST':
+        try:
+            email = req.POST.get("email")
+            current_user.confirm_id = random_id()
+            # if User.objects.filter(email=email).exists():
+            #     messages.error(req, "Email already exists!")
+            #     return redirect("settings")
+            send_mail(
+                "Afnaan's Kitchen Change Email Address",
+                f"""Hello,
+We have noticed that you have tried to change your account's email address. Please go to {req.META['HTTP_HOST']}/confirm_account/{current_user.confirm_id} to reconfirm your account. Your account has been temporarily disabled, but you can login as soon as you reconfirm your account.
+                        
+Best Wishes,
+Safwan Samsudeen, 
+Afnaan's Kitchen
+                        """,
+                'afnaanskitchen.team@gmail.com',
+                [current_user.user.email],
+                fail_silently=False
+            )
+            current_user.user.email = email
+            current_user.confirmed = False
+            current_user.save()
+            current_user.user.save()
+            auth.logout(req)
+            messages.success(
+                req, 'We have sent you a confirmation email. Please check your old email inbox.')
+        except Exception as e:
+            print(e)
+            messages.error(req,
+                           'There was an error while trying to change your email address. Please try again')
+    return redirect('settings')
+
+
+@login_required
+def change_password(req):
+    pass
+
+
+@login_required
+def logout(req):
+    auth.logout(req)
+    messages.success(req, "You are now logged out.")
+    return redirect("index")
+
+
+@login_required
+def settings(req):
+    current_user = CustomUser.objects.get(user=req.user.id)
+    if req.method == 'POST':
+        try:
+            current_user.phone_number = req.POST.get('phone_number')
+            current_user.address = req.POST.get('address')
+            current_user.save()
+            messages.success(req, 'Your settings have been updated')
+        except:
+            messages.error(req,
+                           'There was an error while trying to save your credentials. Please try again')
+    return render(req, 'settings.html', {'cusUser': current_user})
+
+
+@login_required
+def cart(req):
+    pass
 
 
 def confirm_account(req, account_id):
@@ -38,8 +117,8 @@ def menu(req):
 
 def login(req):
     if req.method == "POST":
-        username = req.POST["username"]
-        password = req.POST["password"]
+        username = req.POST.get("username")
+        password = req.POST.get("password")
 
         user = auth.authenticate(username=username, password=password)
         print(user)
@@ -56,12 +135,12 @@ def login(req):
 
 def register(req):
     if req.method == "POST":
-        phone_number = req.POST["phone_number"]
-        address = req.POST["address"]
-        username = req.POST["username"]
-        email = req.POST["email"]
-        password = req.POST["password"]
-        password2 = req.POST["password2"]
+        phone_number = req.POST.get("phone_number")
+        address = req.POST.get("address")
+        username = req.POST.get("username")
+        email = req.POST.get("email")
+        password = req.POST.get("password")
+        password2 = req.POST.get("password2")
         # Password matches validation
         if password != password2:
             messages.error(req, "Passwords do not match!")
@@ -83,12 +162,20 @@ def register(req):
                     username=username, password=password, email=email)
                 custom_user = CustomUser.objects.create(
                     user=user, phone_number=phone_number, address=address)
-                send_mail("Afnaan's Kitchen Account confirmation",
-                          f"Thanks for signing up to Afnaan's Kitchen! We hope you will have an excellent time eating our yummy pizzas! Just one last step...\n\nHead over to {req.META['HTTP_HOST']}/confirm_account/{custom_user.confirm_id}",
-                          'safwansamsudeen@gmail.com',
-                          [email, 'safwansamsudeen@gmail.com'],
-                          fail_silently=False
-                          )
+                send_mail(
+                    "Afnaan's Kitchen Account confirmation",
+                    f"""Thanks for signing up to Afnaan's Kitchen! We hope you will have an excellent time eating our yummy pizzas! Just one last step...
+                    
+Head over to {req.META['HTTP_HOST']}/confirm_account/{custom_user.confirm_id} to automatically confirm your account. You will then by redirected to you dashboard. Happy eating!
+                    
+Best Wishes,
+Safwan Samsudeen, 
+Afnaan's Kitchen
+                    """,
+                    'afnaanskitchen.team@gmail.com',
+                    [email],
+                    fail_silently=False
+                )
                 messages.success(
                     req, "We sent you a confirmation link. Please check your inbox.")
                 return redirect("login")
