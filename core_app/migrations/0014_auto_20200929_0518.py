@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='customuser',
             name='confirm_id',
-            field=models.BigIntegerField(default=core_app.models.random_id),
+            field=models.BigIntegerField(default=1),
         ),
     ]

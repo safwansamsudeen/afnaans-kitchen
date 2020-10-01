@@ -3,8 +3,5 @@ register = template.Library()
 
 
 @register.filter
-def index(indexable, i):
-    return indexable[i]
-
-
-
+def mul(a, b):
+    return a * b

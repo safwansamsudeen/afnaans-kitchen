@@ -1,13 +1,13 @@
 from django.contrib import admin
-from .models import FoodItemModel, FoodTypeModel, TeamModel, CustomUser
+from .models import FoodItem, FoodType, PersonInTeam, CustomUser, CartItem
 
 
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ('user', 'confirmed', 'confirm_id')
-    # list_editable = ('confirmed',)
+    list_filter = ('user', 'confirmed', 'confirm_id')
 
 
-class FoodItemModelAdmin(admin.ModelAdmin):
+class FoodItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'date_added', 'veg',
                     'is_available', 'food_item_type')
     list_editable = ('is_available',)
@@ -16,19 +16,24 @@ class FoodItemModelAdmin(admin.ModelAdmin):
                      'veg', 'is_available', 'description')
 
 
-class TeamModelAdmin(admin.ModelAdmin):
+class PersonInTeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'email_address', 'date_added')
     list_filter = ('name', 'email_address', 'date_added')
     search_fields = ('name', 'email_address', 'date_added')
 
 
-class FoodTypeModelAdmin(admin.ModelAdmin):
+class FoodTypeAdmin(admin.ModelAdmin):
     list_display = ('long_name', 'short_name', 'date_added')
     list_filter = ('long_name', 'short_name', 'date_added')
     search_fields = ('long_name', 'short_name', 'date_added')
 
 
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ('user', 'item', 'qty', 'date_added')
+    list_filter = ('user', 'item', 'qty', 'date_added')
+
 admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(FoodItemModel, FoodItemModelAdmin)
-admin.site.register(FoodTypeModel, FoodTypeModelAdmin)
-admin.site.register(TeamModel, TeamModelAdmin)
+admin.site.register(FoodItem, FoodItemAdmin)
+admin.site.register(FoodType, FoodTypeAdmin)
+admin.site.register(PersonInTeam, PersonInTeamAdmin)
+admin.site.register(CartItem, CartItemAdmin)

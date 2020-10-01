@@ -20,7 +20,12 @@
         {% include 'partials/_footer.html' %}
         <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/vue.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
+        {% if '/menu' == request.path %}
+        <script src="{% static 'js/axios.min.js' %}"></script>
+        <script src="{% static 'js/menu.js' %}"></script>
+        {% endif %}
     </body>
 
 </html>

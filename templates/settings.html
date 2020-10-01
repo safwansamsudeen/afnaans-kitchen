@@ -10,17 +10,17 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" class="form-control" value='{{cusUser}}' required autocomplete="off"
+                <input type="text" name="username" class="form-control" value='{{curUser}}' required autocomplete="off"
                     disabled />
             </div>
             <div class="form-group">
                 <label for="phone_number">Phone Number</label>
-                <input type="text" name="phone_number" class="form-control" value='{{cusUser.phone_number}}' required
+                <input type="text" name="phone_number" class="form-control" value='{{curUser.phone_number}}' required
                     autocomplete="off" />
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <textarea name="address" class="form-control" required>{{cusUser.address}}</textarea>
+                <textarea name="address" class="form-control" required>{{curUser.address}}</textarea>
             </div>
             <input type="submit" value="Save details" class="btn btn-primary btn-block" />
         </form>
@@ -29,7 +29,7 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="email">New Email Address</label>
-                <input type="email" name="email" class="form-control" value='{{cusUser.user.email}}' required
+                <input type="email" name="email" class="form-control" value='{{curUser.user.email}}' required
                     autocomplete="off" />
             </div>
             <input type="submit" value="Change Email Address" class="btn btn-primary btn-block" />
@@ -38,16 +38,16 @@
         <form action="{% url 'change_password' %}" method='POST'>
             {% csrf_token %}
             <div class="form-group">
-                <label for="password2">Old Password</label>
-                <input type='password' name="password" class="form-control" required autocomplete="off" />
+                <label for="old_password">Old Password</label>
+                <input type='password' name="old_password" class="form-control" required autocomplete="off" />
             </div>
             <div class="form-group">
-                <label for="password2">New Password</label>
-                <input type='password' name="password" class="form-control" required autocomplete="off" />
+                <label for="new_password">New Password</label>
+                <input type='password' name="new_password" class="form-control" required autocomplete="off" />
             </div>
             <div class="form-group">
-                <label for="password">Confirm New Password</label>
-                <input type="password" name="password2" class="form-control" required autocomplete="off" />
+                <label for="new_password2">Confirm New Password</label>
+                <input type="password" name="new_password2" class="form-control" required autocomplete="off" />
             </div>
             <input type="submit" value="Change Password" class="btn btn-primary btn-block" />
         </form>

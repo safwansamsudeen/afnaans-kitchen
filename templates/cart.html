@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load mul %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price of one</th>
+                    <th scope="col">Total price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td scope="row">{{order.item}}</td>
+                    <td>{{order.qty}}</td>
+                    <td>{{order.item.price}}</td>
+                    <td>{{order.qty | mul:order.item.price}} </td>
+                </tr>
+                {% endfor %}
+                {% comment %} <tr>
+                    <td scope="row">Margeritha Pizza</td>
+                    <td>2</td>
+                    <td>170</td>
+                    <td>340</td>
+                </tr>
+                <tr>
+                    <td scope="row">Meat Feast</td>
+                    <td>2</td>
+                    <td>375</td>
+                    <td>750</td>
+                </tr>
+                <tr>
+                    <td scope="row">Classic Nuttela Bun</td>
+                    <td>5</td>
+                    <td>100</td>
+                    <td>500</td>
+                </tr> {% endcomment %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <td class='text-right'>{{total_qty}}</td>
+                    <td class='text-right'>--</td>
+                    <td class='text-right'>{{total_price}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+{% endblock content %}

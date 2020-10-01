@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'core_app.apps.CoreAppConfig',
     'core_app.templatetags.index',
+    'core_app.templatetags.mul',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

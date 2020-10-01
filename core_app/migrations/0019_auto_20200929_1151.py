@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('address', models.TextField()),
                 ('phone_number', models.CharField(max_length=100)),
-                ('confirm_id', models.BigIntegerField(default=core_app.models.random_id)),
+                ('confirm_id', models.BigIntegerField(default=1)),
                 ('confirmed', models.BooleanField(default=False)),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
