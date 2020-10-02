@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'core_app.apps.CoreAppConfig',
     'core_app.templatetags.index',
     'core_app.templatetags.mul',
+    'core_app.templatetags.counter',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -146,3 +147,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'afnaanskitchen.team@gmail.com'
 EMAIL_HOST_PASSWORD = 'AfnaansK@ak13'
 EMAIL_USE_TLS = True
+

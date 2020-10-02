@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class CustomUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     address = models.TextField()
-    new_email = models.CharField(max_length=200, default='')
+    new_email = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=100)
     confirm_id = models.BigIntegerField()
     confirmed = models.BooleanField(default=False)
@@ -54,5 +54,5 @@ class PersonInTeam(models.Model):
 class CartItem(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     item = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
-    qty = models.IntegerField(default=1)
+    qty = models.IntegerField(default=0)
     date_added = models.DateTimeField(default=datetime.now)

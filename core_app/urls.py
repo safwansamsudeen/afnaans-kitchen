@@ -9,6 +9,7 @@ urlpatterns = [
     path('confirm_account/<int:account_id>',
          views.confirm_account, name='confirm_account'),
     path('cart', views.cart, name='cart'),
+    path('update_cart', views.update_cart, name='update_cart'),
     path('settings', views.settings, name='settings'),
     path('logout', views.logout, name='logout'),
     path('change_password', views.change_password, name='change_password'),

@@ -2,10 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.http import Http404, JsonResponse
+from django.http import Http404, HttpResponse
 from django.contrib.auth.hashers import check_password
 from .models import FoodItem, PersonInTeam, FoodType, CustomUser, CartItem
 from random import randint
+import json
+
+
+def is_logged_in(req):
+    return req.user.is_authenticated and not req.user.is_superuser
 
 
 def random_id():
@@ -15,9 +20,28 @@ def random_id():
     return randint(range_start, range_end)
 
 
+def update_cart(req):
+    if req.method == 'POST' and is_logged_in(req):
+        data = json.loads(req.body.decode('utf-8'))
+        current_user = CustomUser.objects.get(user=req.user.id)
+        food_item = FoodItem.objects.get(name=data['item'])
+        qty = data['qty']
+        if CartItem.objects.filter(user=current_user, item=food_item):
+            item = CartItem.objects.get(
+                user=current_user, item=food_item)
+            item.qty = qty
+            item.save()
+        else:
+            CartItem.objects.create(
+                user=current_user, item=food_item, qty=qty)
+        return HttpResponse('Cart Item successfully updated.')
+    else:
+        raise Http404()
+
+
 def login_required(func):
     def func_wrapper(req):
-        if req.user.is_authenticated and not req.user.is_superuser:
+        if is_logged_in(req):
             return func(req, CustomUser.objects.get(user=req.user.id))
         else:
             messages.error(req, "Please login first")
@@ -25,24 +49,9 @@ def login_required(func):
     return func_wrapper
 
 
-# def cart_details(req):
-#     data = []
-#     i = 0
-#     cart_items = CartItem.objects.filter(
-#         user=CustomUser.objects.get(user=req.user.id))
-#     for food_item in FoodItem.objects.all():
-#         if food_item in [cart_item.item for cart_item in cart_items]:
-#             print('In')
-#             data.append(cart_items[i].qty)
-#             i += 1
-#         else:
-#             data.append(0)
-#     return JsonResponse(data, safe=False)
-
-
 @login_required
 def cart(req, current_user):
-    orders = CartItem.objects.filter(user=current_user)
+    orders = CartItem.objects.filter(user=current_user, qty__gte=1)
     return render(req, 'cart.html', {
         'cusUser': current_user,
         'orders': orders,
@@ -76,7 +85,7 @@ def change_email(req, current_user):
             send_mail(
                 "Afnaan's Kitchen Change Email Address",
                 f"""Hello,
-We have noticed that you have tried to change your account's email address to {email}. Please go to {req.META['HTTP_HOST']}/change_user_email/{current_user.confirm_id} to reconfirm your account. Your account has been temporarily disabled, but you can login as soon as you reconfirm your account.
+We have noticed that you have tried to change your account's email address to {email}. Please go to {req.META['HTTP_HOST']}/change_user_email/{current_user.confirm_id} to change your email address. 
 
 Best Wishes,
 Safwan Samsudeen,
@@ -142,7 +151,7 @@ def confirm_account(req, account_id):
         user = CustomUser.objects.get(confirm_id=account_id)
         user.confirmed = True
         user.save()
-        auth.login(req, user)
+        auth.login(req, user.user)
         return redirect('settings')
     else:
         raise Http404('Not found')
@@ -166,7 +175,7 @@ def menu(req):
     local_types = [_type.id for _type in types]
     local_items = [items.filter(food_item_type=_type) for _type in local_types]
     data = []
-    if req.user.is_authenticated and not req.user.is_superuser:
+    if is_logged_in(req):
         i = 0
         cart_items = CartItem.objects.filter(
             user=CustomUser.objects.get(user=req.user.id))
@@ -182,12 +191,13 @@ def menu(req):
         'qtys': data
     })
 
+
 def login(req):
     if req.method == "POST":
-        username=req.POST.get("username")
-        password=req.POST.get("password")
+        username = req.POST.get("username")
+        password = req.POST.get("password")
 
-        user=auth.authenticate(username=username, password=password)
+        user = auth.authenticate(username=username, password=password)
         print(user)
         if user and CustomUser.objects.filter(user=user, confirmed=True):
             auth.login(req, user)
@@ -202,12 +212,12 @@ def login(req):
 
 def register(req):
     if req.method == "POST":
-        phone_number=req.POST.get("phone_number")
-        address=req.POST.get("address")
-        username=req.POST.get("username")
-        email=req.POST.get("email")
-        password=req.POST.get("password")
-        password2=req.POST.get("password2")
+        phone_number = req.POST.get("phone_number")
+        address = req.POST.get("address")
+        username = req.POST.get("username")
+        email = req.POST.get("email")
+        password = req.POST.get("password")
+        password2 = req.POST.get("password2")
         # Password matches validation
         if password != password2:
             messages.error(req, "Passwords do not match!")
@@ -225,9 +235,9 @@ def register(req):
 
         else:
             try:
-                user=User.objects.create_user(
+                user = User.objects.create_user(
                     username=username, password=password, email=email)
-                custom_user=CustomUser.objects.create(
+                custom_user = CustomUser.objects.create(
                     user=user, phone_number=phone_number, address=address, confirm_id=random_id())
                 send_mail(
                     "Afnaan's Kitchen Account confirmation",
