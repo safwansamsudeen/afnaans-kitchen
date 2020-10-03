@@ -202,7 +202,7 @@ def login(req):
         if user and CustomUser.objects.filter(user=user, confirmed=True):
             auth.login(req, user)
             messages.success(req, "You are logged in.")
-            return redirect("login")
+            return redirect("index")
         else:
             messages.error(req, "Invalid credentials")
             return redirect("login")
