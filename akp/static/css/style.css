@@ -103,10 +103,6 @@ section#header.menu>.jumbotron {
   margin-bottom: 20px !important;
 }
 
-.item {
-  font-family: 'Montserrat';
-}
-
 .card-group {
   width: 90%;
   margin: 0 auto;
@@ -197,7 +193,6 @@ label {
   background-color: #000;
   color: #fff;
   text-align: center;
-  font-family: 'Montserrat';
   opacity: 0.8;
   padding: 100px;
   border-radius: 8px;

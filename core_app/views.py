@@ -174,21 +174,21 @@ def menu(req):
     local_types_long = [_type.long_name for _type in types]
     local_types = [_type.id for _type in types]
     local_items = [items.filter(food_item_type=_type) for _type in local_types]
-    data = []
+    qtys = []
     if is_logged_in(req):
         i = 0
         cart_items = CartItem.objects.filter(
             user=CustomUser.objects.get(user=req.user.id))
         for food_item in FoodItem.objects.all():
             if food_item in [cart_item.item for cart_item in cart_items]:
-                data.append(cart_items[i].qty)
+                qtys.append(cart_items[i].qty)
                 i += 1
             else:
-                data.append(0)
+                qtys.append(0)
     return render(req, 'menu.html', {
         'types': local_types_long,
         'items': local_items,
-        'qtys': data
+        'qtys': qtys
     })
 
 

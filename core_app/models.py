@@ -56,3 +56,6 @@ class CartItem(models.Model):
     item = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
     qty = models.IntegerField(default=0)
     date_added = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return f"{self.user} - {self.item} - {self.qty}"
