@@ -150,4 +150,6 @@ dmypy.json
 
 # Personal
 venv
-/static
+/media_files
+.vscode
+
