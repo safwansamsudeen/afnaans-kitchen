@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import FoodItem, FoodType, PersonInTeam, CustomUser, CartItem
+from .models import FoodItem, FoodType, PersonInTeam, CustomUser, CartItem, Order
 
 
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ('user', 'confirmed', 'confirm_id')
     list_filter = ('user', 'confirmed', 'confirm_id')
+    search_fields = ('user', 'confirmed', 'confirm_id')
 
 
 class FoodItemAdmin(admin.ModelAdmin):
@@ -31,9 +32,18 @@ class FoodTypeAdmin(admin.ModelAdmin):
 class CartItemAdmin(admin.ModelAdmin):
     list_display = ('user', 'item', 'qty', 'date_added')
     list_filter = ('user', 'item', 'qty', 'date_added')
+    search_fields = ('user', 'item', 'qty', 'date_added')
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'price', 'date_added', 'confirmed')
+    list_filter = ('user', 'date_added', 'confirmed')
+    list_editable = ('confirmed', )
+    search_fields = ('user', 'date_added', 'confirmed')
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(FoodItem, FoodItemAdmin)
 admin.site.register(FoodType, FoodTypeAdmin)
 admin.site.register(PersonInTeam, PersonInTeamAdmin)
 admin.site.register(CartItem, CartItemAdmin)
+admin.site.register(Order, OrderAdmin)

@@ -1,48 +1,74 @@
 {% extends 'base.html' %}
-{% load mul %}
+{% load helper_tags %}
+{% load humanize %}
 {% block title %}Cart{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container" id='app'>
+    {% include 'partials/_alerts.html' %}
     <div class="row">
-        <div class="card col-md-7 p-5 mr-5">
-            <div class="p-3"><strong>Amount of Items</strong>: {{total_qty}}</div>
-            <div class="p-3"><strong>Total Price</strong>: {{total_price}}</div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price of one</th>
+                            <th scope="col">Total price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in cart_items %}
+                        <tr>
+                            <td scope="row" class='item-name'>{{order.item}}</td>
+                            <td>
+                                <div class="row justify-content-center">
+                                    <div class='col-12'></div>
+                                    <div class="btn-group mx-auto" role="group" aria-label="First group">
+                                        <button type="button" class="btn subtract">-</button>
+                                        <button type="button" class="btn btn-primary qty">{{order.qty}}</button>
+                                        <button type="button" class="btn add">+</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>₹<span class="sep-price">{{order.item.price | intcomma}}</span></td>
+                            <td>₹<span class="total-price">{{order.qty | mul:order.item.price}}</span></td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td class='text-center' colspan='4'>There are no items in your cart! <a class='text-danger'
+                                    href="{% url 'menu' %}#menu">Add them now.</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="card col-md-4 p-5">
-            {% comment %} <div class="paypal-container"></div> {% endcomment %}
-            <div class="p-3"><strong>Amount of Items</strong>: {{total_qty}}</div>
-            <div class="p-3"><strong>Total Price</strong>: {{total_price}}</div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12 card mx-auto">
+                    <h1 class='m-4 text-center'>Checkout</h1>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="px-3">
+                                <div class="p-3"><strong>Amount of Items</strong>: <span
+                                        id="total-qty">{{total_qty | intcomma}}</span></div>
+                                <div class="p-3"><strong>Total Price</strong>: <span
+                                        id="total-price">{{total_price | intcomma}}</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 text-center mx-auto mt-4">
+                            <form action="{% url 'cart' %}" method='POST'>
+                                {% csrf_token %}
+                                <button type='submit' class="btn btn-dark btn-large btn-block order-button text-light">
+                                    Place Order
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price of one</th>
-                    <th scope="col">Total price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in orders %}
-                <tr>
-                    <td scope="row">{{order.item}}</td>
-                    <td>{{order.qty}}</td>
-                    <td>{{order.item.price}}</td>
-                    <td>{{order.qty | mul:order.item.price}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            {% comment %} <tfoot>
-                <tr>
-                    <th>Total</th>
-                    <td class="text-right">{{total_qty}}</td>
-                    <td class="text-right">--</td>
-                    <td class="text-right">{{total_price}}</td>
-                </tr>
-            </tfoot> {% endcomment %}
-        </table>
     </div>
 </div>
 {% endblock content %}

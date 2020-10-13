@@ -34,15 +34,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'core_app.apps.CoreAppConfig',
-    'core_app.templatetags.index',
-    'core_app.templatetags.mul',
-    'core_app.templatetags.counter',
+    'core_app.templatetags.helper_tags',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -147,4 +146,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'afnaanskitchen.team@gmail.com'
 EMAIL_HOST_PASSWORD = 'AfnaansK@ak13'
 EMAIL_USE_TLS = True
+
 

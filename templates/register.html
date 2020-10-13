@@ -15,19 +15,22 @@
               {% csrf_token %}
               <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" name="username" class="form-control" required autocomplete="off" autofocus/>
+                <input type="text" name="username" class="form-control" required autocomplete="off" autofocus
+                  value='{{values.username}}' />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" class="form-control" required autocomplete="off" />
+                <input type="email" name="email" class="form-control" required autocomplete="off"
+                  value='{{values.email}}' />
               </div>
               <div class="form-group">
                 <label for="phone_number">Phone Number</label>
-                <input type="text" name="phone_number" class="form-control" required autocomplete="off" />
+                <input type="text" name="phone_number" class="form-control" required autocomplete="off"
+                  value='{{values.phone_number}}' />
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
-                <textarea name="address" class="form-control" required></textarea>
+                <textarea name="address" class="form-control" required>{{values.address}}</textarea>
               </div>
               <div class="form-group">
                 <label for="password2">Password</label>

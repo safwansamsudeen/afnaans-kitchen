@@ -1,0 +1,40 @@
+{% load static %}
+{% load helper_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Document</title>
+    </head>
+
+    <body style='font-family:"Roboto"'>
+        <div>
+            Hello,
+        </div>
+        User {{current_user}} has given in an order with the following items.
+        <ul>
+            {% for order in cart_items %}
+            <li>
+                <em>{{order.item}}</em> - {{order.qty}}
+            </li>
+            {% endfor %}
+        </ul>
+        User details
+        <ul>
+            <li>Phone Number: <a href="tel:{{current_user.phone_number}}">{{current_user.phone_number}}</a></li>
+            <li>Email Address: {{current_user.user.email}}</li>
+            <li>Address: <a
+                    href="https://www.google.com/maps/place/{{current_user.address | replace_space_with:'+'}}">{{current_user.address}}</a>
+            </li>
+        </ul>
+        <div>
+            Best Wishes,<br>
+            Safwan Samsudeen,<br>
+            Afnaan's Kitchen <br>
+        </div>
+    </body>
+
+</html>
