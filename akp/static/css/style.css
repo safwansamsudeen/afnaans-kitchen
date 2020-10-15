@@ -71,14 +71,17 @@ hr {
   background-image: url("../images/header_background.JPG");
 }
 
-.menu .jumbotron {
-  background-image: url("../images/menu.jpg");
+.menu-type-header .jumbotron {
   background-size: 40% 100%;
   background-repeat: no-repeat;
   background-position: right center;
 }
 
-section#header.menu>.jumbotron {
+.menu .jumbotron {
+  background-image: url("../images/menu.jpg");
+}
+
+section#header.menu-type-header>.jumbotron {
   padding: 0 4% 10% 4%;
 }
 
@@ -89,7 +92,7 @@ section#header.menu>.jumbotron {
 }
 
 
-.menu .title {
+.menu-type-header .title {
   padding: 2% 0 4%;
   font-weight: 500;
   font-size: 400%;
@@ -97,6 +100,7 @@ section#header.menu>.jumbotron {
 
 .subtext {
   margin-top: 10%;
+  font-size: 100%;
 }
 
 /* Card */
@@ -221,11 +225,11 @@ label {
     font-size: 200%;
   }
 
-  .menu .title {
+  .menu-type-header .title {
     font-size: 200%;
   }
 
-  .menu .jumbotron {
+  .menu-type-header .jumbotron {
     background-image: none;
   }
 }

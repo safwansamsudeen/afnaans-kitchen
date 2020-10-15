@@ -65,5 +65,15 @@ class Order(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     price = models.IntegerField(default=0)
     order_description_dict = models.TextField(default='{}')
-    confirmed = models.BooleanField(default=False)
+    status = models.CharField(max_length=2, choices=(
+        ('W', 'To be Confirmed'),
+        ('P', 'Being Prepared'),
+        ('O', 'On the Way'),
+        ('D', 'Delivered'),
+        ('C', 'Cancelled'),
+    ), default='W')
     date_added = models.DateTimeField(default=datetime.now)
+    user_description = models.TextField(default="")
+
+    def __str__(self):
+        return f"{self.user} - {self.date_added.strftime('%d/%m/%y')}"

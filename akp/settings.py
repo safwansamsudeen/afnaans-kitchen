@@ -27,7 +27,7 @@ SECRET_KEY = '!wnzm^98qw1*1zp%z6%*xjm3*)jo1r1zj%m=p(hd22x66&b5+m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['afnaanskitchen.pythonanywhere.com']
 
 
 # Application definition
@@ -78,16 +78,21 @@ WSGI_APPLICATION = 'akp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'akdb',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Safwan@akdb13',
+#         'HOST': 'localhost'
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'akdb',
-        'USER': 'postgres',
-        'PASSWORD': 'Safwan@akdb13',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -146,5 +151,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'afnaanskitchen.team@gmail.com'
 EMAIL_HOST_PASSWORD = 'AfnaansK@ak13'
 EMAIL_USE_TLS = True
-
-

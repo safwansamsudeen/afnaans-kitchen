@@ -1,0 +1,12 @@
+#header{
+    background: #10284e;
+    color: #fff;
+}
+
+#branding h1 {
+    color: #fff;
+}
+
+.img-rounded {
+    border-radius: 50%;
+}

@@ -143,9 +143,20 @@ def cart(req, current_user):
     items = FoodItem.objects.filter(is_available=True)
     cart_items = CartItem.objects.filter(
         user=current_user, qty__gte=1).order_by('-item')
+
+    if Order.objects.filter(user=current_user, status='W'):
+        messages.warning(
+            req, 'You already have an order waiting to be confirmed.')
+    if Order.objects.filter(user=current_user, status='P'):
+        messages.warning(
+            req, 'You already have an order being prepared.')
+    if Order.objects.filter(user=current_user, status='O'):
+
+        messages.warning(
+            req, 'You already have an order being delivered.')
+
     if req.method == 'POST':
         return redirect('order')
-
     return render(req, 'cart.html', {
         'cart_items': cart_items,
         'total_qty': sum([order.qty for order in cart_items]),
@@ -165,6 +176,14 @@ def settings(req, current_user):
             messages.error(req,
                            'There was an error while trying to save your credentials. Please try again')
     return render(req, 'settings.html', {'current_user': current_user})
+
+
+@login_required
+def user_orders(req, current_user):
+    orders = Order.objects.filter(user=current_user)
+    return render(req, 'user_orders.html', {
+        'orders': orders,
+    })
 
 
 @login_required

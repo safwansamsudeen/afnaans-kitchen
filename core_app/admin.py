@@ -36,10 +36,10 @@ class CartItemAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'price', 'date_added', 'confirmed')
-    list_filter = ('user', 'date_added', 'confirmed')
-    list_editable = ('confirmed', )
-    search_fields = ('user', 'date_added', 'confirmed')
+    list_display = ('user', 'price', 'date_added', 'status')
+    list_filter = ('user', 'date_added', 'status')
+    list_editable = ('status', )
+    search_fields = ('user', 'date_added', 'status')
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(FoodItem, FoodItemAdmin)
