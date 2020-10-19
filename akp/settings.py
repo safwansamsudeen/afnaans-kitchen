@@ -27,7 +27,7 @@ SECRET_KEY = '!wnzm^98qw1*1zp%z6%*xjm3*)jo1r1zj%m=p(hd22x66&b5+m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['afnaanskitchen.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -78,15 +78,6 @@ WSGI_APPLICATION = 'akp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'akdb',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Safwan@akdb13',
-#         'HOST': 'localhost'
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

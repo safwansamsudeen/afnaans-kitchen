@@ -150,6 +150,10 @@ dmypy.json
 
 # Personal
 venv
-/media_files
+media_files
+static_files
 .vscode
 
+todo.md
+.DS_Store
+App requirements.pages

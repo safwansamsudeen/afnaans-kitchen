@@ -1,14 +1,8 @@
-{% load static %}
 {% load helper_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <title>Document</title>
-    </head>
+    <head></head>
 
     <body style='font-family:"Roboto"'>
         <div>
@@ -22,6 +16,7 @@
             </li>
             {% endfor %}
         </ul>
+        <p>User {{current_user}} wants you to deliver his pizzas at {{order.delivery_time}}. Thanks!</p>
         User details
         <ul>
             <li>Phone Number: <a href="tel:{{current_user.phone_number}}">{{current_user.phone_number}}</a></li>

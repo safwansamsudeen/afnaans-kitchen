@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>You don't have cookies Enabled</title>
+    </head>
+
+    <body>
+        <h1>It seems that you have disabled cookies</h1>
+        <p>Some of our functionality doesn't work without cookies. Please enable cookies in your browser settings
+            to use this website</p>
+        <script>
+            function cookieEnabled() {
+                var cookieEnabled = navigator.cookieEnabled;
+                if (!cookieEnabled) {
+                    document.cookie = "testcookie";
+                    cookieEnabled = document.cookie.indexOf("testcookie") != -1;
+                }
+                return cookieEnabled;
+            }
+            if (cookieEnabled()) {
+                let path = new URLSearchParams(window.location.search).get('redirect')
+                if (!path) path = `${window.location.origin}`;
+                window.location.href = path
+            }
+        </script>
+    </body>
+
+</html>

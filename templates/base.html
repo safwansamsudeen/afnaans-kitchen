@@ -8,6 +8,19 @@
         <link rel="stylesheet" href="{% static 'css/all.min.css' %}" />
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="icon" href="{% static 'images/logo.jpg' %}">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180650146-2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-180650146-2');
+        </script>
         <noscript>
             <meta http-equiv="refresh" content="0; url=no_js" />
         </noscript>
@@ -20,6 +33,7 @@
         {% include 'partials/_footer.html' %}
         <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
         <script src="{% static 'js/jquery.are-you-sure.js' %}"></script>
+        <script src="{% static 'js/jquery.validate.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'js/axios.min.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
@@ -31,6 +45,9 @@
         {% endif %}
         {% if '/order' == request.path%}
         <script src="{% static 'js/order_page.js' %}"></script>
+        {% endif %}
+        {% if '/register' == request.path or '/login' == request.path %}
+        <script src="{% static 'js/validate.js' %}"></script>
         {% endif %}
     </body>
 

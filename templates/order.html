@@ -8,36 +8,36 @@
             {% include 'partials/_alerts.html' %}
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h4 id='part-title'>Confirm Order</h4>
+                    <h4 id='part-title'>Confirm Details</h4>
                 </div>
                 <div class="card-body">
                     <form action="{% url 'order' %}" method="POST" id='order-form'>
                         {% csrf_token %}
-                        <div class="row first-part">
-                            <div class="col-md-6">
+                        <div class="row part one">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" value='{{current_user}}' required
                                         autocomplete="off" disabled />
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone_number">Phone Number (to call when needed)</label>
-                                    <input type="text" name="phone_number" class="form-control"
-                                        value='{{current_user.phone_number}}' required autocomplete="off" />
+                                    <label for="phonenumber">Phone Number (to call when needed)</label>
+                                    <input type="text" name="phonenumber" class="form-control"
+                                        value='{{current_user.phone_number}}' autocomplete="off" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address to deliver items.</label>
-                                    <textarea name="address" class="form-control" required=""
-                                        style="height: 200px; ">{{current_user.address}}</textarea>
+                                    <textarea name="address" class="form-control"
+                                        required>{{current_user.address}}</textarea>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-lg-6">
                                 <div class="p-2"><strong>Amount of Items</strong>: <span
                                         id="total-qty">{{total_qty | intcomma}}</span></div>
                                 <div class="p-2 mb-2"><strong>Total Price</strong>: <span
                                         id="total-price">{{total_price | intcomma}}</span>
                                 </div>
-                                <div class="card h-75">
+                                <div class="card">
                                     <h5>Order Summary</h5>
                                     <div class="overflow-auto">
                                         {% for cart_item in cart_items %}
@@ -49,17 +49,46 @@
                                 </div>
                             </div>
                             <a href="{% url 'cart' %}" class="btn btn-light btn-block border-primary mt-4">Cancel</a>
-                            <button type='button' class="btn btn-primary btn-block mt-3 next-part">Confirm Details and
+                            <button type='submit' class="btn btn-primary btn-block mt-3 next-part">Confirm
+                                Details and
                                 Proceed</button>
-
                         </div>
-                        <div class="row hidden second-part" id='password'>
+                        <div class="row hidden part" id='descripion'>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group py-2">
+                                        <label for="descripion">Order descripion</label>
+                                        <textarea name="descripion" class="form-control" required /></textarea>
+                                    </div>
+                                    <div class="form-group py-2">
+                                        <label for="deliverytime">Time and Date to deliver <small>(Please inform us before 24 hours.)</small></label>
+                                        <textarea name="deliverytime" class="form-control" required /></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="p-2"><strong>Amount of Items</strong>: <span
+                                            id="total-qty">{{total_qty | intcomma}}</span></div>
+                                    <div class="p-2 mb-2"><strong>Total Price</strong>: <span
+                                            id="total-price">{{total_price | intcomma}}</span>
+                                    </div>
+                                    <div class="card">
+                                        <h5>Order Summary</h5>
+                                        <div class="overflow-auto">
+                                            {% for cart_item in cart_items %}
+                                            <div class="p-2">
+                                                <em>{{cart_item.item}}</em> - {{cart_item.qty}}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group py-2">
                                 <label for="password">Password</label>
                                 <input type='password' name="password" class="form-control" required
                                     autocomplete="off" />
                             </div>
-                            <input type="submit" value="Submit" class="btn btn-primary btn-block mt-3" />
+                            <button type="submit"class="btn btn-primary btn-block mt-3" id='true-submit' />Submit and Place order</button>
                         </div>
                     </form>
                 </div>

@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 
 
@@ -72,6 +72,8 @@ class Order(models.Model):
         ('D', 'Delivered'),
         ('C', 'Cancelled'),
     ), default='W')
+    last_modified = models.DateTimeField(auto_now=True)
+    delivery_time = models.CharField(default='', max_length=500)
     date_added = models.DateTimeField(default=datetime.now)
     user_description = models.TextField(default="")
 

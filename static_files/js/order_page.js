@@ -11,12 +11,29 @@ $(function () {
                 + 'If you leave before saving, your changes will be lost.'
         }
     );
-    $('.next-part').on('click', e => {
-        const part = $(e.target).parents('div[class$="-part"]');
-        part.slideUp(500);
-        const next_part = part.next()
-        next_part.slideDown(500)
-        $('#part-title').text(title(next_part[0].id.replace('_', ' ')))
-    })
-
+    validator = $("#order-form").validate({
+        rules: {
+            phonenumber: {
+                number: true,
+                minlength: 10
+            },
+        },
+        onfocusout: function (element) {
+            $(element).valid();
+        },
+        submitHandler: (form, e) => {
+            form = $(form);
+            if (!form.valid()) return
+            const submitter = $(e.originalEvent.submitter)
+            if (submitter.attr('id') === 'true-submit') {
+                console.log('In');
+                form.submit()
+            }
+            const part = submitter.parents('div.part');
+            part.slideUp(500);
+            const next_part = part.next()
+            next_part.slideDown(500)
+            $('#part-title').text(title(next_part.attr('id').replace('_', ' ')))
+        }
+    });
 });

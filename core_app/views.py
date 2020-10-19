@@ -111,21 +111,17 @@ def register(req):
                 user = User.objects.create_user(
                     username=username, password=password, email=email)
                 custom_user = CustomUser.objects.create(
-                    user=user, phone_number=phone_number, address=address, confirm_id=random_id(12))
+                    user=user, phone_number=phone_number, address=address, confirm_id=random_id(18))
                 send_mail(
                     "Afnaan's Kitchen Account confirmation",
-                    f"""Thanks for signing up to Afnaan's Kitchen! We hope you will have an excellent time eating our yummy pizzas! Just one last step...
-
-Head over to {req.META['HTTP_HOST']}/confirm_account/{custom_user.confirm_id} to automatically confirm your account. You will then by redirected to you dashboard. Happy eating!
-
-Best Wishes,
-Safwan Samsudeen,
-Afnaan's Kitchen
-                    """,
+                    '',
                     'afnaanskitchen.team@gmail.com',
                     [email],
-                    fail_silently=False
-                )
+                    fail_silently=False,
+                    html_message=render_to_string('email_html/confirm_account.html', {
+                        'url': f"{req.META['HTTP_HOST']}{reverse('confirm_account', kwargs={'account_id': custom_user.confirm_id})}"
+                    })
+                    )
                 messages.success(
                     req, "We sent you a confirmation link. Please check your inbox.")
                 return redirect("login")
@@ -193,29 +189,32 @@ def order(req, current_user):
         user=current_user, qty__gte=1).order_by('-item')
     total_price = sum(
         [cart_item.item.price*cart_item.qty for cart_item in cart_items])
-    if total_price == 0:
+    if not cart_items:
         messages.error(
             req, 'Please add items to your cart first.')
         return redirect('cart')
     if req.method == 'POST':
         phone_number = req.POST.get("phone_number", '')
         address = req.POST.get("address", '')
+        description = req.POST.get("description", '')
+        deliverytime = req.POST.get("deliverytime", '')
         password = req.POST.get('password', '')
         if not check_password(password, current_user.user.password):
             messages.error(req, 'Invalid password!')
             return redirect('order')
-        Order.objects.create(user=current_user, price=total_price, order_description_dict={
+        order = Order.objects.create(user=current_user, price=total_price, order_description_dict={
             str(cart_item.item): cart_item.qty for cart_item in cart_items
-        })
+        }, delivery_time=deliverytime)
         send_mail(
             f"New Order by User {current_user}",
             '',
             'afnaanskitchen.team@gmail.com',
-            ['safwansamsudeen@gmail.com'],
+            ['afnaanskitchen272@gmail.com'],
             fail_silently=False,
             html_message=render_to_string('email_html/order_email.html', {
                 'current_user': current_user,
                 'cart_items': cart_items,
+                'order': order
             })
         )
         CartItem.objects.filter(user=current_user).delete()
@@ -235,6 +234,10 @@ def no_js(req):
     return render(req, 'no_js.html')
 
 
+def cookie_disabled(req):
+    return render(req, 'cookie_disabled.html')
+
+
 @login_required
 def logout(req, current_user):
     auth.logout(req)
@@ -248,7 +251,7 @@ def confirm_account(req, account_id):
         user.confirmed = True
         user.save()
         auth.login(req, user.user)
-        return redirect('settings')
+        return redirect('index')
     else:
         raise Http404('Not found')
 
@@ -287,19 +290,18 @@ def change_email(req, current_user):
             elif current_user.user.email == email:
                 return redirect('settings')
 
-            current_user.confirm_id = random_id(12)
+            current_user.confirm_id = random_id(18)
             send_mail(
                 "Afnaan's Kitchen Change Email Address",
-                f"""Hello,
-We have noticed that you have tried to change your account's email address to {email}. Please go to {req.META['HTTP_HOST']}{reverse('confirm_email_change', kwargs={'confirm_id': current_user.confirm_id})} to change your email address. 
-
-Best Wishes,
-Safwan Samsudeen,
-Afnaan's Kitchen
-                        """,
+                '',
                 'afnaanskitchen.team@gmail.com',
                 [current_user.user.email],
-                fail_silently=False
+                fail_silently=False,
+                html_message=render_to_string('email_html/confirm_email_change.html', {
+                    'current_user': current_user,
+                    'email': email,
+                    'url': f"{req.META['HTTP_HOST']}{reverse('confirm_email_change', kwargs={'confirm_id': current_user.confirm_id})}"
+                })
             )
             current_user.new_email = email
             current_user.save()

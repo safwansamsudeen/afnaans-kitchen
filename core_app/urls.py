@@ -11,6 +11,7 @@ urlpatterns = [
     path('user_orders', views.user_orders, name='user_orders'),
     path('order', views.order, name='order'),
     path('no_js', views.no_js, name='no_js'),
+    path('cookie_disabled', views.cookie_disabled, name='cookie_disabled'),
     path('logout', views.logout, name='logout'),
     path('confirm_account/<int:account_id>',
          views.confirm_account, name='confirm_account'),

@@ -36,7 +36,7 @@ class CartItemAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'price', 'date_added', 'status')
+    list_display = ('user', 'price', 'date_added', 'status', 'last_modified')
     list_filter = ('user', 'date_added', 'status')
     list_editable = ('status', )
     search_fields = ('user', 'date_added', 'status')

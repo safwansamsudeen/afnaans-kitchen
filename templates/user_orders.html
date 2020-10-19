@@ -2,19 +2,19 @@
 {% block title %}Your Orders{% endblock %}
 {% load humanize %}
 {% block content %}
+<section id="header" class='menu-type-header'>
+    <div class="jumbotron">
+        <h1 class="title">
+            Your Orders
+        </h1>
+        <small class='subtext'>Keep track of all your orders in Afnaan's Kitchen</small>
+    </div>
+</section>
 <div class="container">
-    <section id="header" class='menu-type-header'>
-        <div class="jumbotron">
-            <h1 class="title">
-                Your Orders
-            </h1>
-            <small class='subtext'>Keep track of all your orders in Afnaan's Kitchen</small>
-        </div>
-    </section>
     {% include 'partials/_alerts.html' %}
     <div class="row">
         <div class="col-md-12">
-            <div class="table-responsive" >
+            <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -27,15 +27,15 @@
                     <tbody>
                         {% for order in orders %}
                         <tr>
-                            <td scope="row" >{{order.date_added}}</td>
+                            <td scope="row">{{order.date_added}}</td>
                             <td>₹{{order.price}}</td>
                             <td>{{order.user_description}}</td>
                             <td>{{order.get_status_display}}</td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td class='text-center' colspan='4'>There are no items in your cart! <a class='text-danger'
-                                    href="{% url 'menu' %}#menu">Add them now.</a></td>
+                            <td class='text-center' colspan='4'>You have not yet ordered from Afnaan's Kitchen! <a class='text-danger'
+                                    href="{% url 'menu' %}#menu">Order now.</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

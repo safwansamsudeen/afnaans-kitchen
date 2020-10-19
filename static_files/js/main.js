@@ -11,6 +11,22 @@ $(function () {
             window.open('admin')
         }
     }
+
+    function checkCookie() {
+        if (window.location.pathname === '/cookie_disabled') return
+        var cookieEnabled = navigator.cookieEnabled;
+        if (!cookieEnabled) {
+            document.cookie = "testcookie";
+            cookieEnabled = document.cookie.indexOf("testcookie") != -1;
+        }
+        return cookieEnabled || showCookieFail();
+    }
+
+    function showCookieFail() {
+        window.location.href = `/cookie_disabled?redirect=${window.location.pathname}`
+    }
+    checkCookie();
+
 })
 
 function notIsNanInIterable(iterable) {
@@ -23,8 +39,11 @@ function notIsNanInIterable(iterable) {
     return newIterable
 }
 
-function getCookie(key) {
+function getCookie(key, reload) {
     var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    if (!keyValue && reload) {
+        location.reload()
+    }
     return keyValue ? keyValue[2] : null;
 }
 
@@ -42,7 +61,7 @@ function update_cart(e, func) {
     axios.post(`${window.location.origin}/update_cart`, {
         item: name,
         qty: number,
-    }, { headers: { "X-CSRFToken": getCookie('csrftoken') } })
+    }, { headers: { "X-CSRFToken": getCookie('csrftoken', true) } })
         .then(data => console.log(data))
         .catch(err => console.log(err));
 }
