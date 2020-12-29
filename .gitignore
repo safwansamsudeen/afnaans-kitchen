@@ -154,6 +154,6 @@ media_files
 static_files
 .vscode
 
-todo.md
+# todo.md
 .DS_Store
-App requirements.pages
+# App requirements.pages

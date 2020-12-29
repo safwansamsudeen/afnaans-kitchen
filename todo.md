@@ -1,0 +1,12 @@
+- <s>Send emails through HTML</s>
+- <s>Change email ID to Afnaan's</s>
+- <s>Add Favicon</s>
+- <s>Make jumbotron on orders page out of container</s>
+- Make footer responsive
+- <s>Show message if cookies is disabled - force user to allow cookies.</s>
+- <s>Set Debug to False</s>
+- <s>Have production settings in seperate file</s>
+- <s>Set delivery time</s>
+- <s>Do frontend validation</s>
+- <s>If the user removes cookies reload the page</s>
+- Make 404 page
