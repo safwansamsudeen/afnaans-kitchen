@@ -140,5 +140,5 @@ MESSAGE_TAGS = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'afnaanskitchen.team@gmail.com'
-EMAIL_HOST_PASSWORD = 'AfnaansK@ak13'
+EMAIL_HOST_PASSWORD = '*********'
 EMAIL_USE_TLS = True
