@@ -7,7 +7,7 @@ DATABASES = {
         },
         'NAME': 'afnaanskitchen$akdb',
         'USER': 'afnaanskitchen',
-        'PASSWORD': 'AfnaansK@db13',
+        'PASSWORD': '************',
         'HOST': 'afnaanskitchen.mysql.pythonanywhere-services.com'
     }
 }
